@@ -30,6 +30,7 @@ def nba_games_pipeline(file_name: str):
         # load data to CSV
         csv_path = f'{OUTPUT_PATH}/{file_name}_games.csv'
         load_data(games_data, csv_path)
+        print("Succesfully loaded data")
 
         return csv_path
 
