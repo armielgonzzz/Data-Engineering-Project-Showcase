@@ -1,0 +1,56 @@
+version: '3'
+
+x-airflow-common:
+  &airflow-common
+  build:
+    context: .
+    dockerfile: Dockerfile
+  env_file:
+    - airflow.env
+  volumes:
+    - ./configs:/opt/airflow/configs
+    - ./dags:/opt/airflow/dags
+    - ./data:/opt/airflow/data
+    - ./logs:/opt/airflow/logs
+    - ./etl:/opt/airflow/etl
+    - ./pipeline:/opt/airflow/pipeline
+    - ./requirements.txt:/opt/airflow/requirements.txt
+  depends_on:
+    - redis
+    - postgres
+
+services:
+  airflow-init:
+    <<: *airflow-common
+    command: >
+      bash -c "airflow db init && airflow db upgrade && airflow users create --username admin --firstname admin --lastname admin --role Admin --email airflow@airflow.com --password admin"
+    restart: "no"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+      POSTGRES_PORT: 5432
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+
+  airflow-worker:
+    <<: *airflow-common
+    command: celery worker
