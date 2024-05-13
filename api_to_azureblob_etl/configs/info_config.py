@@ -22,7 +22,5 @@ reader = extract_config_info()
 API_KEY = reader['API']['API_KEY']
 URL = reader['URL']['URL']
 OUTPUT_PATH = reader['PATH']['output']
-AZURE_CONNECTION_STRING = reader['AZURE']['connection_string']
+CONNECTION_STRING = reader['AZURE']['connection_string']
 CONTAINER_NAME = reader['AZURE']['container']
-
-print(API_KEY, URL, OUTPUT_PATH, AZURE_CONNECTION_STRING, CONTAINER_NAME)
