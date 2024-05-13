@@ -58,7 +58,7 @@ python etl.py
 
 
  #### Reference: 
-[Psycopg](http://initd.org/psycopg/docs/)
+[Psycopg](https://www.psycopg.org/docs/)
 
 [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 
