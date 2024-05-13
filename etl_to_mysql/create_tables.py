@@ -1,41 +1,40 @@
-import psycopg2
+import mysql.connector
 from sql_queries import create_table_queries, drop_table_queries
+from config_info import host, user, password
 
 
 def create_database():
     '''
-    This function will connect to the local database (PostgreSQL)
+    This function will connect to the local database (MySQL)
     and will return the connection and cursor.
     
     return: returns (cur, db), a cursor and connection reference
-    cur: cursor of PostgreSQL
-    db: connection of PostgreSQL
+    cur: cursor of MySQL
+    db: connection of MySQL
     '''
     
     # connect first to default database 'postgres'
-    db = psycopg2.connect(
-        host='localhost',
-        user='postgres',
-        password='admin',
-        database='postgres'
+    db = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
+        database='sys'
     )
     
-    # set database autocommit to true and set the cursor
-    db.set_session(autocommit=True)
     cur = db.cursor()
         
     # create march_madness database with UTF8 encoding
     cur.execute("DROP DATABASE IF EXISTS march_madness")
-    cur.execute("CREATE DATABASE march_madness WITH ENCODING 'utf8'")
+    cur.execute("CREATE DATABASE march_madness")
     
     # close connection to default database
     db.close()
     
     # connect to 'march_madness' database
-    db = psycopg2.connect(
-        host='localhost',
-        user='postgres',
-        password='admin',
+    db = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
         database='march_madness'
     )
     
@@ -74,21 +73,26 @@ def main():
     '''
     This is a driver function that will drop and create tables.
     '''
+    try:
+        # connect to MySQL and get reference for cursor and database
+        cur, db = create_database()
+        print("Successfully CREATED database.")
+        
+        # drop all tables if exists
+        drop_tables(cur, db)
+        print("Successfully DROPPED tables.")
+        
+        # create all tables
+        create_tables(cur, db)
+        print("Successfully CREATED tables.")
+
+    except Exception as e:
+        print(f'Error while interacting with MySQL Database: {e}')    
     
-    # connect to PostgreSQL and get reference for cursor and database
-    cur, db = create_database()
-    
-    # drop all tables if exists
-    drop_tables(cur, db)
-    print("Successfully DROPPED tables.")
-    
-    # create all tables
-    create_tables(cur, db)
-    print("Successfully CREATED tables.")
-    
-    # close cursor and database
-    cur.close()
-    db.close()
+    finally:
+        # close cursor and database
+        cur.close()
+        db.close()
 
 if __name__ == "__main__":
     main()

@@ -1,18 +1,19 @@
-import psycopg2
+import mysql.connector
 import pandas as pd
 from sql_queries import *
+from config_info import host, user, password
 
-def connect_to_postgres() -> tuple[psycopg2.extensions.cursor, psycopg2.extensions.connection]:
+def connect_to_postgres():
     '''
-    Connecting to PostgreSQL database and returning the reference for
+    Connecting to MySQL database and returning the reference for
     cursor and connection.
     '''
 
-    # assigning 'db' as connection to PostgreSQL
-    db = psycopg2.connect(
-        host='localhost',
-        user='postgres',
-        password='admin',
+    # assigning 'db' as connection to MySQL
+    db = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
         database='march_madness'
     )
     
@@ -24,7 +25,7 @@ def connect_to_postgres() -> tuple[psycopg2.extensions.cursor, psycopg2.extensio
 def create_team_info(df: pd.DataFrame) -> pd.DataFrame:
     '''
     This function will modify 'march_madness.csv' to a 
-    dataframe with selected rows and columns for 'team_info' table in PostgreSQL.
+    dataframe with selected rows and columns for 'team_info' table in MySQL.
     '''
 
     # filtering the columns and rows of dataframe needed for team_info table
@@ -37,7 +38,7 @@ def create_team_info(df: pd.DataFrame) -> pd.DataFrame:
 def create_offensive_stats(df: pd.DataFrame) -> pd.DataFrame:
     '''
     This function will modify 'march_madness.csv' to a 
-    dataframe with selected rows and columns for 'team_offensive_stats' table in PostgreSQL.
+    dataframe with selected rows and columns for 'team_offensive_stats' table in MySQL.
     '''
 
     # filtering the columns and rows of dataframe needed for team_offensive_stats table
@@ -50,7 +51,7 @@ def create_offensive_stats(df: pd.DataFrame) -> pd.DataFrame:
 def create_defensive_stats(df: pd.DataFrame) -> pd.DataFrame:
     '''
     This function will modify 'march_madness.csv' to a 
-    dataframe with selected rows and columns for 'team_defensive_stats' table in PostgreSQL.
+    dataframe with selected rows and columns for 'team_defensive_stats' table in MySQL.
     '''
 
     # filtering the columns and rows of dataframe needed for team_defensive_stats table
@@ -64,7 +65,7 @@ def create_defensive_stats(df: pd.DataFrame) -> pd.DataFrame:
 def insert_to_database(db, cur, team_info, offensive_stats, defensive_stats) -> None:
     '''
     This driver function will load all of the dataframes that we have modified
-    into PostgreSQL database using Psycopg2 Module.
+    into MySQL database using mysql.connector Module.
     
     db: database connection reference
     cur: database cursor
@@ -105,24 +106,28 @@ def main():
     '''
     Main driver that will run all of the functions.
     '''
-    
-    # connect to PostgreSQL
-    cur, db = connect_to_postgres()
-    
-    # reading the 'march_madness.csv' file and assigning it to 'df'
-    df = pd.read_csv('march_madness.csv')
-    
-    # creating variables for returns of functions
-    team_info = create_team_info(df)
-    offensive_stats = create_offensive_stats(df)
-    defensive_stats = create_defensive_stats(df)
-    
-    # loading the dataframes into PostgreSQL
-    insert_to_database(db, cur, team_info, offensive_stats, defensive_stats)
-    
-    # closing cursor and database
-    cur.close()
-    db.close()
+    try:
+        # connect to MySQL
+        cur, db = connect_to_postgres()
+        
+        # reading the 'march_madness.csv' file and assigning it to 'df'
+        df = pd.read_csv('march_madness.csv')
+        
+        # creating variables for returns of functions
+        team_info = create_team_info(df)
+        offensive_stats = create_offensive_stats(df)
+        defensive_stats = create_defensive_stats(df)
+        
+        # loading the dataframes into MySQL
+        insert_to_database(db, cur, team_info, offensive_stats, defensive_stats)
+
+    except Exception as e:
+        print(f'Error while running ETL {e}')
+
+    finally:
+        # closing cursor and database
+        cur.close()
+        db.close()
 
 if __name__ == "__main__":
     main()
