@@ -1,8 +1,8 @@
-# ETL Pipeline with Pandas and PostgreSQL
+# ETL Pipeline with Pandas and MySQL
 
 ## **Overview**
 
-In this project, we apply Data modelling with Postgres and build an ETL pipeline using Python. We're give a dataset of the stats of all the teams participating in USA NCAA. We are to build a pipeline that will transform the dataset leaving only the teams that are competing in this year's March Madness. After transforming the dataset, this will be inserted in our database in PostgreSQL.
+In this project, we apply Data modelling with MySQL and build an ETL pipeline using Python. We're give a dataset of the stats of all the teams participating in USA NCAA. We are to build a pipeline that will transform the dataset leaving only the teams that are competing in this year's March Madness. After transforming the dataset, this will be inserted in our database in MySQL.
 
 
 ## Schema
@@ -38,9 +38,9 @@ team_name, post_season_tournament, field_goal_percentage, field_goal_percentage_
 ## Environment 
 Python 3.8 or above
 
-PostgresSQL 16.2
+MySQL 16.2
 
-psycopg2 - PostgreSQL database adapter for Python
+psycopg2 - MySQL database adapter for Python
 
 
 ## How to run
@@ -60,6 +60,6 @@ python etl.py
  #### Reference: 
 [Psycopg](https://www.psycopg.org/docs/)
 
-[PostgreSQL Documentation](https://www.postgresql.org/docs/)
+[MySQL Documentation](https://dev.mysql.com/doc/)
 
 [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
