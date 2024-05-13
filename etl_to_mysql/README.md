@@ -40,7 +40,7 @@ Python 3.8 or above
 
 MySQL 16.2
 
-psycopg2 - MySQL database adapter for Python
+MySQL Connector - MySQL database adapter for Python
 
 
 ## How to run

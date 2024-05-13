@@ -1,12 +1,12 @@
 # Data Engineering Projects
 
-## Project 1: ETL Pipeline with Pandas and PostgreSQL
-In this project, we apply Data modelling with Postgres and build an ETL pipeline using Python. We're give a dataset of the stats of all the teams participating in USA NCAA. We are to build a pipeline that will transform the dataset leaving only the teams that are competing in this year's March Madness. After transforming the dataset, this will be inserted in our database in PostgreSQL.
+## Project 1: ETL Pipeline with Pandas and MySQL
+In this project, we apply Data modelling with MySQL and build an ETL pipeline using Python. We're give a dataset of the stats of all the teams participating in USA NCAA. We are to build a pipeline that will transform the dataset leaving only the teams that are competing in this year's March Madness. After transforming the dataset, this will be inserted in our database in MySQL.
 
-Link : [Data_Modeling_with_Postgres_and_Pandas](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/etl_to_postgresql)
+Link : [Data_Modeling_with_MySQL_and_Pandas](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/etl_to_mysql)
 
 ## Project 2: API Data to MySQL Data Pipeline
-In this project, we are to extract data of all the Dota 2 Heroes from a public API. This data will then get transformed after going though the data pipeline. Finally, it will be loaded into the local MySQL Server.
+In this project, we are to extract data of all the Dota 2 Heroes from a public API. This data will then get transformed after going though the data pipeline. Finally, it will be loaded into the local MySQL Database.
 
 Link : [ETL_Pipeline_API_to_MySQL](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/api_to_mysql_etl)
 
