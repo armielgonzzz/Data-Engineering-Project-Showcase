@@ -37,7 +37,9 @@ Python 3.8 or above
 
 Microsoft Azure
 
-Azure Blob Storage
+Azure Storage SDK for Python
+
+Python Requests Library
 
 
 ## How to run

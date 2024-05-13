@@ -29,6 +29,8 @@ MySQL 8.0.36
 
 MySQL Connector - MySQL database adapter for Python
 
+Python Requests Library
+
 
 ## How to run
 
