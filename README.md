@@ -10,7 +10,7 @@ In this project, we are to extract data of all the Dota 2 Heroes from a public A
 
 Link : [ETL_Pipeline_API_to_MySQL](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/api_to_mysql_etl)
 
-## Project 3: API to Azure Blob Storage
+## Project 3: API Data Extaction and Transformation to Azure Blob Storage
 In this project, we apply data modelling to the data that is extracted from a public API of NBA Games. This data will be then transformed by the ETL pipeline and then uploaded to a Azure Blob Storage container. The file that is uploaded contains all of the games that we're played today in CSV format.
 
 Link : [API_to_Azure_Blob_Storage_ETL_Pipeline](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/api_to_azureblob_etl)
