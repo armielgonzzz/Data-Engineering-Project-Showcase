@@ -1,11 +1,10 @@
 '''
 This module is used for passing GET Request to the public API.
 '''
-
 import requests
 
 
-def get_request(url: str) -> list[dict]:
+def get_request(url: str) -> list:
     '''
     This function returns the extracted data in form of JSON from Dota 2 API.
     '''

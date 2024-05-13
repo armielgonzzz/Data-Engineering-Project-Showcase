@@ -1,4 +1,4 @@
-import psycopg2
+import mysql.connector
 from sql_queries import create_hero_info_table, drop_hero_info_table, insert_hero_info
 from access_api import get_request
 from config_info import host, user, password, database, url
@@ -13,19 +13,24 @@ def connect_to_database(host: str, user: str, password: str, database: str):
     db: reference for database connection
     cur: reference for database cursor
     '''
+    try:
+        # connect to database
+        db = mysql.connector.connect(
+            host = host,
+            user = user,
+            password = password,
+            database = database
+        )
+        
+        # cursor reference
+        cur = db.cursor()
+
+        return db, cur
     
-    # connect to database
-    db = psycopg2.connect(
-        host = host,
-        user = user,
-        password = password,
-        database = database
-    )
-    
-    # cursor reference
-    cur = db.cursor()
-    
-    return db, cur
+    except Exception as e:
+        print(f'Error upon creating connection: {e}')
+        return None
+        
 
 
 def drop_create_table(db, cur) -> None:
@@ -42,9 +47,11 @@ def drop_create_table(db, cur) -> None:
     db.commit()
     
     
-def modify_data(hero_info: dict) -> tuple[int, str, str, str]:
+def modify_data(hero_info: dict) -> tuple:
     '''
     Transforms data retrieved from API to satisfy the table in database    
+    
+    hero_info: JSON Data from the public API
     '''
     
     # Extract values from the dict
@@ -91,31 +98,26 @@ def main() -> None:
     # retrieve data from the API
     response = get_request(url)
         
-    if response:
-        try:
-            # iterate through the list of json file retrieved from the API
-            for data in response:
+    try:
+        # iterate through the list of json file retrieved from the API
+        for data in response:
 
-                # load data to PostgreSQL
-                load_data(db, cur, data, modify_data)
+            # load data to PostgreSQL
+            load_data(db, cur, data, modify_data)
+
+        print('Loading data to database successful!')
+    
+    except Exception as e:
+        print('An error occured while loading the data to database:', e)
         
-        except Exception as e:
-            print('An error occured:', e)
-            
-            # rollback the database in case of error
-            db.rollback()    
-            
-            # close the cursor and database connection
-            cur.close()
-            db.close()
+        # rollback the database in case of error
+        db.rollback()    
 
-    # this part onwards, will only be reached if no errors are catched during iteration of json file
-    print('Loading data to database successful!')
-    
-    # after loading all data in database, close db and cur
-    cur.close()
-    db.close()
-    
+    finally:
+        # close the cursor and database connection
+        cur.close()
+        db.close()
+
 
 if __name__ == "__main__":
     main()

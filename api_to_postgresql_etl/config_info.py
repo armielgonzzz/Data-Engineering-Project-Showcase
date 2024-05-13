@@ -1,5 +1,5 @@
 '''
-Module contains attributes of information from 'config.ini'.
+Module contains attributes of information from '.config'.
 '''
 
 import configparser
@@ -16,11 +16,7 @@ def load_config(config_file: str) -> configparser.ConfigParser:
     return config
 
 # parser object
-config = load_config('config.ini')
-
-'''
-info from config.ini
-'''
+config = load_config('.config')
 
 # database info
 host = config.get('database', 'host')

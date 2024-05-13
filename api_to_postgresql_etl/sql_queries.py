@@ -12,9 +12,9 @@ PostgreSQL.
 create_hero_info_table = """
     CREATE TABLE IF NOT EXISTS hero_info (
         id INT NOT NULL,
-        hero_name VARCHAR NOT NULL PRIMARY KEY,
-        primary_attribute VARCHAR NOT NULL,
-        attack_type VARCHAR NOT NULL
+        hero_name VARCHAR(50) NOT NULL PRIMARY KEY,
+        primary_attribute VARCHAR(5) NOT NULL,
+        attack_type VARCHAR(10) NOT NULL
     )
 """
 
