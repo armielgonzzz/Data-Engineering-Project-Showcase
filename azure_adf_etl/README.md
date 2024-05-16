@@ -1,5 +1,7 @@
 # Azure Data Lake Storage Event-Triggered Data Transformation Using Azure Data Factory
 
+![](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/azure_adf_etl/azure_etl.gif)
+
 ## **Overview**
 
 In this project, we will create an Event-Based Data Transformation using Azure Data Factory. A Blob-Created Event Trigger will be placed inside of a container in Azure Data Lake Storage Gen 2. This trigger will then automatically run our data pipeline in Azure Data Factory once a CSV File is uploaded to the container. The data ingestion, transformation and loading of data to sinks will be done using Azure Databricks. After the data is transformed, Azure Databricks will load the data in Azure SQL Database and Azure Synapse Analytics Dedicated SQL Pool.
