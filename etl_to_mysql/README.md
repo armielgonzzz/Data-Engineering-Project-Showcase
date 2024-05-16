@@ -57,7 +57,7 @@ python etl.py
 ```
 
 
- #### Reference: 
+## Reference
 [MySQL Connector](https://www.psycopg.org/docs/)
 
 [MySQL Documentation](https://dev.mysql.com/doc/)

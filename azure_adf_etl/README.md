@@ -40,7 +40,7 @@ Azure Synapse Analytics
 Azure Key Vaults
 
 
- #### Reference: 
+## Reference
 [Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/)
 
 [Azure Databricks](https://learn.microsoft.com/en-us/azure/databricks/)

@@ -40,7 +40,7 @@ python main.py
 ``` 
 
 
-#### Reference: 
+## Reference
 [MySQL Connector](https://dev.mysql.com/doc/connector-python/en/)
 
 [MySQL Documentation](https://dev.mysql.com/doc/)
