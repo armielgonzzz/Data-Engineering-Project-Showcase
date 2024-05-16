@@ -27,6 +27,8 @@ Apache Spark 3.4.1
 
 Scala 2.12
 
+PySpark
+
 Microsoft Azure
 
 Azure Data Lake Storage Gen 2
@@ -43,8 +45,10 @@ Azure Key Vaults
 
 
 ## Reference
-[Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/)
+[Azure Data Factory Documentation](https://learn.microsoft.com/en-us/azure/data-factory/)
 
-[Azure Databricks](https://learn.microsoft.com/en-us/azure/databricks/)
+[Azure Databricks Documentation](https://learn.microsoft.com/en-us/azure/databricks/)
 
-[Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/)
+[Azure Synapse Analytics Documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/)
+
+[PySpark Documentation](https://spark.apache.org/docs/latest/api/python/index.html)
