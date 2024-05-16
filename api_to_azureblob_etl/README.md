@@ -43,6 +43,8 @@ Azure Storage SDK for Python
 
 Python Requests Library
 
+Pandas Library
+
 
 ## How to run
 
@@ -53,6 +55,8 @@ python main.py
 
 ## Reference
 [Python Requests Documentation](https://requests.readthedocs.io/en/latest/)
+
+[Pandas Documentation](https://pandas.pydata.org/docs/)
 
 [Azure Storage SDK for Python](https://learn.microsoft.com/en-us/python/api/overview/azure/storage?view=azure-python)
 
