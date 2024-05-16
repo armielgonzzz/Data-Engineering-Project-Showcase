@@ -1,5 +1,7 @@
 # API to Azure Blob Storage Data Pipeline
 
+![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/api_to_azureblob_etl/api_to_blob.gif)
+
 ## **Overview**
 
 In this project, we will apply data modelling to the data that is extracted from a public API of NBA Games. This data will be then transformed by the ETL pipeline and then uploaded to a Azure Blob Storage container. The file that is uploaded contains all of the games that we're played today in CSV format.

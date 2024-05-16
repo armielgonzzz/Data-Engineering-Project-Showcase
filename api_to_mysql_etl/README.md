@@ -1,5 +1,7 @@
 # API Data to MySQL Data Pipeline
 
+![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/api_to_mysql_etl/api_to_mysql.gif)
+
 ## **Overview**
 
 In this project, we are to extract data of all the Dota 2 Heroes from a public API. This data will then get transformed after going though the data pipeline. At the last step, it will be loaded into the local MySQL Database.

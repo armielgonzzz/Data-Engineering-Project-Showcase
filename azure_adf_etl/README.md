@@ -1,6 +1,6 @@
 # Azure Data Lake Storage Event-Triggered Data Transformation Using Azure Data Factory
 
-![](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/azure_adf_etl/azure_etl.gif)
+![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/azure_adf_etl/azure_etl.gif)
 
 ## **Overview**
 

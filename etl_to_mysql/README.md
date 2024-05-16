@@ -1,5 +1,7 @@
 # ETL Pipeline with Pandas and MySQL
 
+![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/etl_to_mysql/etl_to_mysql.gif)
+
 ## **Overview**
 
 In this project, we apply Data modelling with MySQL and build an ETL pipeline using Python. We're give a dataset of the stats of all the teams participating in USA NCAA. We are to build a pipeline that will transform the dataset leaving only the teams that are competing in this year's March Madness. After transforming the dataset, this will be inserted in our database in MySQL.
