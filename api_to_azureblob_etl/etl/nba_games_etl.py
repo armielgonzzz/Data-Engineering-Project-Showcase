@@ -20,10 +20,10 @@ def extract_data(key: str, url: str) -> dict:
     '''
 
     # subtract 1 day from today to account for the timezone difference
-    date_today = date.today() - timedelta(days=1)
+    yesterday = date.today() - timedelta(days=1)
     
     header = {"Authorization": key}
-    params = {"dates": [date_today, date_today]}
+    params = {"dates": [date.today(), yesterday]}
 
     # GET Request to the API
     response = requests.get(url=url, headers=header, params=params)

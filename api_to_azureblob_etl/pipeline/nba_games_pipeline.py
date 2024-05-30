@@ -22,19 +22,24 @@ def nba_games_pipeline(file_name: str) -> str:
 
     # extract data
     games = extract_data(API_KEY, URL)
-
+   
     # if there are games today, perform the rest of the ETL
+    if games['data']:
+        try:
+            # transform
+            games_data = transform_data(games)
 
-    try:
-        # transform
-        games_data = transform_data(games)
+            # load data to CSV
+            csv_path = f'{OUTPUT_PATH}/{file_name}_games.csv'
+            load_data(games_data, csv_path)
+            print("Succesfully extracted and transformed the data")
 
-        # load data to CSV
-        csv_path = f'{OUTPUT_PATH}/{file_name}_games.csv'
-        load_data(games_data, csv_path)
-        print("Succesfully extracted and transformed the data")
+            return csv_path
 
-        return csv_path
-
-    except Exception as e:
-        print(f'Error occured during extraction of data from API: {e}')
+        except Exception as e:
+            print(f'Error occured during extraction of data from API: {e}')
+            return None
+    
+    else:
+        print('There are no games today')
+        return None
