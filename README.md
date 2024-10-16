@@ -27,3 +27,10 @@ In this project, we will create an Event-Based Data Transformation using Azure D
 ![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/azure_adf_etl/azure_etl.gif)
 
 Link : [Azure Data Lake Storage Event-Triggered Data Transformation Using Azure Data Factory](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/tree/main/azure_adf_etl)
+
+## Project 5: Snowflake Datawarehouse ELT using Fivetran & dbt
+In this project, we will create an ELT Pipeline using the tools **Fivetran** and **dbt**. **Fivetran** will handle the extraction and loading of data from Azure MySQL database to Snowflake Data Warehouse. While, **dbt** will transform the raw OLTP data that was loaded from Azure MySQL Database into an OLAP Data to Snowflake Data Warehouse.
+
+![Project Visualization](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/snowflake_dbt_transform/snowflake_dbt_transform.gif)
+
+Link : [Snowflake Datawarehouse ELT using Fivetran & dbt](https://github.com/armielgonzzz/Data-Engineering-Project-Showcase/blob/main/snowflake_dbt_transform)
