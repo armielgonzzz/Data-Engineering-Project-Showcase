@@ -1,0 +1,13 @@
+sales_sf_transform:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WH') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}"
+      threads: 1

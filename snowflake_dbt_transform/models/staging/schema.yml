@@ -1,0 +1,205 @@
+version: 2
+
+sources:
+  - name: mysql_azure_sales_raw
+    database: sales_app
+    schema: mysql_azure_sales_raw
+    tables:
+      - name: customers
+      - name: customer_types
+      - name: manufacturers
+      - name: orders
+      - name: products
+
+models:
+
+  - name: stg_customers
+    description: "This table contains cleaned information about customers"
+    columns:
+
+      - name: customer_id
+        description: "Unique identifier of customers"
+        data_tests:
+          - unique
+          - not_null
+      
+      - name: full_name
+        description: "Full name of customer"
+        data_tests:
+          - not_null
+      
+      - name: state
+        description: "State address of the customer"
+        data_tests:
+          - not_null
+
+      - name: customer_type
+        description: "Name of the type of the customer"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['REGULAR', 'PREMIUM', VIP]
+      
+      - name: customer_discount
+        description: "Rate of discount per customer"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [0.05, 0.1, 0.2]
+      
+      - name: date_creation
+        description: "Date when the customer info is created"
+        data_tests:
+          - not_null
+
+      - name: sync_date
+        description: "Date when the row is updated"
+        data_tests:
+          - not_null
+  
+  - name: stg_manufacturers
+    description: "This table contains information about manufacturers of all available products"
+    columns:
+
+      - name: manufacturer_id
+        description: "Unique identifier of each manufacturer"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: manufacturer_name
+        description: "Name of the manufacturer company"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: manufacturer_state
+        description: "State of where the manufacturer's office is located"
+        data_tests:
+          - not_null
+      
+      - name: sync_date
+        description: "Date when the row is updated"
+        data_tests:
+          - not_null
+
+  - name: stg_products
+    description: "This table contains information about all of the products"
+    columns:
+
+      - name: product_id
+        description: "Unique identifier for each of the products"
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: product_name
+        description: "Name of the product"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_price
+        description: "Price of certain products"
+        data_tests:
+          - not_null
+
+      - name: manufacturer_id
+        description: "Manufacturer for the product"
+        data_tests:
+          - not_null
+      
+      - name: sync_date
+        description: "Date when the row is updated"
+        data_tests:
+          - not_null
+
+  - name: stg_order_dates
+    description: "This table contains dates that all order were made"
+    columns:
+
+      - name: date_id
+        description: "Unique identifer for each of the order dates"
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: day_of_week
+        description: "Name of the day of the week"
+        data_tests:
+          - not_null
+          - valid_day_of_week
+      
+      - name: week_of_month
+        description: "Week number of each month"
+        data_tests:
+          - not_null
+          - valid_week_of_month
+      
+      - name: month
+        description: "Month number of the year"
+        data_tests:
+          - not_null
+          - valid_month
+      
+      - name: year
+        description: "Year number of order date"
+        data_tests:
+          - not_null
+
+      - name: sync_date
+        description: "Date when the row is updated"
+        data_tests:
+          - not_null
+  
+  - name: stg_orders
+    description: "Fact table for all orders and dimensions that will describe it"
+    columns:
+
+      - name: order_id
+        description: "Unique identifier for each order"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: "Unique id of each products"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+      - name: customer_id
+        description: "Unique identifier for each customers"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+      - name: date_id
+        description: "Unique identifier for each of order dates"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_order_dates')
+              field: date_id
+
+      - name: manufacturer_id
+        description: "Unique identifier for each of manufacturers"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_manufacturers')
+              field: manufacturer_id
+
+      - name: total_order_cost
+        description: "Total of each of the orders"
+        data_tests:
+          - not_null
+
+      - name: sync_date
+        description: "Date when the row is updated"
+        data_tests:
+          - not_null

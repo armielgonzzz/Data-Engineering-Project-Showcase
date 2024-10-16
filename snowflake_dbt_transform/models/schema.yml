@@ -1,0 +1,139 @@
+version: 2
+
+models:
+
+  - name: dim_customers
+    description: "Dimension table for customer informations"
+    columns:
+
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: full_name
+
+      - name: state
+        data_tests:
+          - not_null
+      
+      - name: customer_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['REGULAR', 'PREMIUM', 'VIP']
+      
+      - name: customer_discount
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [0.05, 0.1, 0.2]
+      
+      - name: date_creation
+        data_tests:
+          - not_null
+
+  - name: dim_manufacturers
+    description: "Dimension table for manufacturers"
+    columns:
+
+      - name: manufacturer_id
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: manufacturer_name
+        data_tests:
+          - not_null
+          - unique
+
+      - name: manufacturer_state
+        data_tests:
+          - not_null
+
+  - name: dim_products
+    description: "Dimension table for products"
+    columns:
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: product_name
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: product_price
+        data_tests:
+          - not_null
+
+  - name: dim_order_dates
+    description: "Dimension table for dates of all orders"
+    columns:
+
+      - name: date_id
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: day_of_week
+        data_tests:
+          - not_null
+          - valid_day_of_week
+      
+      - name: week_of_month
+        data_tests:
+          - not_null
+          - valid_week_of_month
+      
+      - name: month
+        data_tests:
+          - not_null
+          - valid_month
+
+      - name: year
+        data_tests:
+          - not_null
+
+  - name: fact_orders
+    description: "Fact table for all orders and dimensions that will describe it"
+    columns:
+
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: date_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_order_dates')
+              field: date_id
+
+      - name: manufacturer_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_manufacturers')
+              field: manufacturer_id
+
+      - name: total_order_cost
+        data_tests:
+          - not_null
